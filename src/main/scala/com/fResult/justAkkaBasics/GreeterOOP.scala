@@ -3,7 +3,7 @@ package com.fResult.justAkkaBasics
 import akka.actor.typed.Behavior
 import akka.actor.typed.scaladsl.{AbstractBehavior, ActorContext, Behaviors}
 
-object Greeter {
+object GreeterOOP {
   // <- Protocol definition, the type of message(s) the actor handles
   // Note: We support a single message type here.
   // We will see later how to support multiple message types.
