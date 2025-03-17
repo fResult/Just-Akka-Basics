@@ -14,6 +14,11 @@ object Greeter {
   class GreeterBehavior(context: ActorContext[Greet]) extends AbstractBehavior[Greet](context) {
     def apply(): Behavior[Greet] = Behaviors.setup(new GreeterBehavior(_))
 
-    override def onMessage(message: Greet): Behavior[Greet] = ???
+    override def onMessage(message: Greet): Behavior[Greet] = {
+      context.log.info(s"Hello, ${message.whom}!")
+      // returning `this` allows the next message to be processed
+      // by the same behavior
+      this
+    }
   }
 }
