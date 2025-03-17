@@ -1,7 +1,7 @@
 package com.fResult.justAkkaBasics
 
 import akka.actor.typed.Behavior
-import akka.actor.typed.scaladsl.{AbstractBehavior, ActorContext}
+import akka.actor.typed.scaladsl.{AbstractBehavior, ActorContext, Behaviors}
 
 object Greeter {
   // <- Protocol definition, the type of message(s) the actor handles
@@ -12,6 +12,8 @@ object Greeter {
 
   // The case class we define for our behaviors within our actor
   class GreeterBehavior(context: ActorContext[Greet]) extends AbstractBehavior[Greet](context) {
+    def apply(): Behavior[Greet] = Behaviors.setup(new GreeterBehavior(_))
+
     override def onMessage(message: Greet): Behavior[Greet] = ???
   }
 }
