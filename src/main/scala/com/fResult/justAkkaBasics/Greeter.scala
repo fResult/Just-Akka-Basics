@@ -1,21 +1,17 @@
 package com.fResult.justAkkaBasics
 
+import akka.actor.typed.Behavior
+import akka.actor.typed.scaladsl.{AbstractBehavior, ActorContext}
 
 object Greeter {
-  def apply(): Behavior[Greet] =
-    Behaviors.setup { context =>
-      val childActorRef = context.spawn(ChildActor(), "childActorName")
-      welcoming(childActorRef)
-    }
+  // <- Protocol definition, the type of message(s) the actor handles
+  // Note: We support a single message type here.
+  // We will see later how to support multiple message types.
+  final case class Greet(whom: String)
+  // Protocol definition ->
 
-  def welcoming(childActorRef: ActorRef[ChildCommand]) =
-Behaviors.receive { (context, message) =>
-  message match {
-    case Greet(whom) =>
-      val childActor = context.spawn(ChildActor(), "childActorName")
-      // interact with the child to process the message,
-      // or save the ActorRef in state to interact with it later
-      Behaviors.same
+  // The case class we define for our behaviors within our actor
+  class GreeterBehavior(context: ActorContext[Greet]) extends AbstractBehavior[Greet](context) {
+    override def onMessage(message: Greet): Behavior[Greet] = ???
   }
 }
-
