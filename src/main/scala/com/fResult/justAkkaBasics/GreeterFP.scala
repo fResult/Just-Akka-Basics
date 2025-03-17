@@ -6,8 +6,8 @@ import akka.actor.typed.scaladsl.Behaviors
 object GreeterFP {
   // <- Protocol definition, the type of message(s) the actor handles
   sealed trait GreetCommand
-  private final case class Greet(whom: String) extends GreetCommand
-  private final case class GoodBye(whom: String) extends GreetCommand
+  final case class Greet(whom: String) extends GreetCommand
+  final case class GoodBye(whom: String) extends GreetCommand
   // Protocol definition ->
 
   def apply(): Behavior[GreetCommand] =
