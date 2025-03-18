@@ -16,6 +16,7 @@ object Main {
 
     // ! Send a message to `greeterSystem` actor
     greeterSystem ! GreeterFP.Greet("Akka w/ FP")
+    greeterSystem ! GreeterFP.Greet("Korn w/ FP")
     greeterSystem ! GreeterFP.GoodBye("Akka w/ FP")
     println(">>> Press ENTER to exit <<<")
     Try(readLine())
@@ -30,7 +31,7 @@ object Main {
 
     // ! Send a message to `greeterSystem` actor
     greeterSystem ! GreeterOOP.Greet("Akka w/ OOP")
-    greeterSystem ! GreeterOOP.Greet("Korn")
+    greeterSystem ! GreeterOOP.Greet("Korn w/ OOP")
     greeterSystem ! GreeterOOP.GoodBye("Akka w/ OOP")
     println(">>> Press ENTER to exit <<<")
     Try(readLine())
