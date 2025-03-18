@@ -31,10 +31,9 @@ object GreeterOOP {
             context.log.info(s"Hello, $whom! Greet count [$greetsCount]")
           } else {
             // If we reached max greets count...
-            context.log.info(s"Sorry $whom, I'm too tired to greet! Greet count [$greetsCount]")
+            context.log.warn(s"Sorry $whom, I'm too tired to greet! Greet count [$greetsCount]")
           }
-
-        case GoodBye(_) => context.log.error("No Goodbye")
+        case _ => context.log.error("Only for Greet")
 
       this
     }

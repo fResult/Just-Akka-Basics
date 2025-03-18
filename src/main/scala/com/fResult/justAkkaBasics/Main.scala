@@ -34,6 +34,8 @@ object Main {
     greeterSystem ! GreeterOOP.Greet("Akka w/ OOP")
     greeterSystem ! GreeterOOP.Greet("Korn w/ OOP")
     greeterSystem ! GreeterOOP.GoodBye("Akka w/ OOP")
+    greeterSystem ! GreeterOOP.Greet("John w/ OOP")
+    greeterSystem ! GreeterOOP.Greet("Alex w/ OOP")
     println(">>> Press ENTER to exit <<<")
     readLine()
     Exception.ignoring(classOf[Exception])
