@@ -18,15 +18,23 @@ object GreeterOOP {
 
   // The case class we define for our behaviors within our actor
   private class GreeterBehavior(context: ActorContext[GreetCommand])
-    extends AbstractBehavior[GreetCommand](context) {
+      extends AbstractBehavior[GreetCommand](context) {
+
+    // We add mutable state as a class field
+    private var attendance = 0
 
     override def onMessage(message: GreetCommand): Behavior[GreetCommand] = {
       message match {
-        case Greet(whom) => context.log.info(s"Hello, $whom!")
-        case GoodBye(whom) => context.log.info(s"Goodbye, $whom!")
+        case Greet(whom) =>
+          // Welcome! attendance increases
+          attendance += 1
+          context.log.info(s"Hello, $whom! Attendance is [$attendance]")
+        case GoodBye(whom) =>
+          // Goodbye! attendance decreases
+          attendance -= 1
+          context.log.info(s"Goodbye, $whom! Attendance is [$attendance]")
       }
-      // returning `this` allows the next message to be processed
-      // by the same behavior
+
       this
     }
   }

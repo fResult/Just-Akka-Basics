@@ -30,6 +30,7 @@ object Main {
 
     // ! Send a message to `greeterSystem` actor
     greeterSystem ! GreeterOOP.Greet("Akka w/ OOP")
+    greeterSystem ! GreeterOOP.Greet("Korn")
     greeterSystem ! GreeterOOP.GoodBye("Akka w/ OOP")
     println(">>> Press ENTER to exit <<<")
     Try(readLine())
