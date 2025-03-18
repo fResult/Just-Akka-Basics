@@ -28,7 +28,7 @@ object Main {
   }
 
   private def handleGreeterOop(): Unit = {
-    val greeterSystem = ActorSystem(GreeterOOP(), "greeter-oop")
+    val greeterSystem = ActorSystem(GreeterOOP(1), "greeter-oop")
 
     // ! Send a message to `greeterSystem` actor
     greeterSystem ! GreeterOOP.Greet("Akka w/ OOP")

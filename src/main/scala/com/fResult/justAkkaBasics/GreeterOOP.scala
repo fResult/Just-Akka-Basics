@@ -14,26 +14,27 @@ object GreeterOOP {
   final case class GoodBye(whom: String) extends GreetCommand
   // Protocol definition ->
 
-  def apply(): Behavior[GreetCommand] = Behaviors.setup[GreetCommand](new GreeterBehavior(_))
+  def apply(maxGreets: Int = 10): Behavior[GreetCommand] = Behaviors.setup(context => new GreeterBehavior(context, maxGreets))
 
   // The case class we define for our behaviors within our actor
-  private class GreeterBehavior(context: ActorContext[GreetCommand])
-      extends AbstractBehavior[GreetCommand](context) {
+  private class GreeterBehavior(context: ActorContext[GreetCommand],
+                                private val maxGreets: Int) extends AbstractBehavior[GreetCommand](context) {
 
     // We add mutable state as a class field
-    private var attendance = 0
+    private var greetsCount = 0
 
     override def onMessage(message: GreetCommand): Behavior[GreetCommand] = {
-      message match {
+      message match
         case Greet(whom) =>
-          // Welcome! attendance increases
-          attendance += 1
-          context.log.info(s"Hello, $whom! Attendance is [$attendance]")
-        case GoodBye(whom) =>
-          // Goodbye! attendance decreases
-          attendance -= 1
-          context.log.info(s"Goodbye, $whom! Attendance is [$attendance]")
-      }
+          if (greetsCount < maxGreets) {
+            greetsCount += 1
+            context.log.info(s"Hello, $whom! Greet count [$greetsCount]")
+          } else {
+            // If we reached max greets count...
+            context.log.info(s"Sorry $whom, I'm too tired to greet! Greet count [$greetsCount]")
+          }
+
+        case GoodBye(_) => context.log.error("No Goodbye")
 
       this
     }
