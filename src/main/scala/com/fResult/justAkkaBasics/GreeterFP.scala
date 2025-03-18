@@ -30,4 +30,3 @@ object GreeterFP {
     Behaviors.same
   }
 }
-
