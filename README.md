@@ -20,4 +20,3 @@ sdk install java 21.0.2-graalce # or your preferred version
 sdk install scala 3.6.4 # or 3.x.x you prefer
 sdk install sbt 1.10.11 # or newer
 ```
-

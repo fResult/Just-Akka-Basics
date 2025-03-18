@@ -3,7 +3,7 @@ package com.fResult.justAkkaBasics
 import akka.actor.typed.ActorSystem
 
 import scala.io.StdIn.readLine
-import scala.util.Try
+import scala.util.control.Exception
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -19,7 +19,8 @@ object Main {
     greeterSystem ! GreeterFP.Greet("Korn w/ FP")
     greeterSystem ! GreeterFP.GoodBye("Akka w/ FP")
     println(">>> Press ENTER to exit <<<")
-    Try(readLine())
+    readLine()
+    Exception.ignoring(classOf[Exception])
 
     // When ActorSystem.terminate is invoked, the CoordinatedShutdown process
     // will stop actors and services in specific order.
@@ -34,7 +35,8 @@ object Main {
     greeterSystem ! GreeterOOP.Greet("Korn w/ OOP")
     greeterSystem ! GreeterOOP.GoodBye("Akka w/ OOP")
     println(">>> Press ENTER to exit <<<")
-    Try(readLine())
+    readLine()
+    Exception.ignoring(classOf[Exception])
 
     // When ActorSystem.terminate is invoked, the CoordinatedShutdown process
     // will stop actors and services in specific order.
