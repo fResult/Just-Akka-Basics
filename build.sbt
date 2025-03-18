@@ -1,5 +1,4 @@
 ThisBuild / version := "0.1.0"
-
 ThisBuild / scalaVersion := "3.3.5"
 
 lazy val root = (project in file("."))
@@ -16,7 +15,6 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion,
   "com.typesafe.akka" %% "akka-stream-typed" % AkkaVersion,
   "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
-
-  "ch.qos.logback" % "logback-classic" % "1.5.17" // Add this
-
+  "com.typesafe" % "config" % "1.4.3",
+  "ch.qos.logback" % "logback-classic" % "1.5.17"
 )
