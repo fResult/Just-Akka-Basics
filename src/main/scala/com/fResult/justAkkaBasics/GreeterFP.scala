@@ -15,18 +15,10 @@ object GreeterFP {
   def apply(): Behavior[GreetCommand] =
     Behaviors.receive[GreetCommand] { (context, message) =>
       message match {
-        case Greet(whom) => greet(whom, context)
-        case GoodBye(whom) => goodBye(whom, context)
+        case Greet(whom) => context.log.info(s"Hello, $whom!")
+        case GoodBye(whom) => context.log.info(s"Goodbye, $whom!")
       }
+
+      Behaviors.same
     }
-
-  private def greet(whom: String, context: ActorContext[GreetCommand]): Behavior[GreetCommand] = {
-    context.log.info(s"Hello, $whom!")
-    Behaviors.same
-  }
-
-  private def goodBye(whom: String, context: ActorContext[GreetCommand]): Behavior[GreetCommand] = {
-    context.log.info(s"Goodbye, $whom!")
-    Behaviors.same
-  }
 }
