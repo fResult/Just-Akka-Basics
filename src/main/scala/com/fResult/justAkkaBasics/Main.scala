@@ -1,8 +1,6 @@
 package com.fResult.justAkkaBasics
 
 import akka.actor.typed.ActorSystem
-import akka.actor.typed.scaladsl.Behaviors
-import com.fResult.justAkkaBasics.GreeterFP.GreetCommand
 
 import scala.io.StdIn.readLine
 import scala.util.Try
