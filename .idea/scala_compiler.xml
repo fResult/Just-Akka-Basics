@@ -2,6 +2,6 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <option name="separateProdTestSources" value="true" />
-    <profile name="sbt 1" modules="temp-scala,temp-scala.main,temp-scala.test" />
+    <profile name="sbt 1" modules="Just Akka Basics (Scala),Just Akka Basics (Scala).main,Just Akka Basics (Scala).test,just-akka-basics,just-akka-basics.main,just-akka-basics.test,temp-scala,temp-scala.main,temp-scala.test" />
   </component>
 </project>
