@@ -17,7 +17,7 @@ object GreeterFP {
   def apply(state: State): Behavior[GreetCommand] = doGreeter(state)
 
   private def doGreeter(state: State): Behavior[GreetCommand] =
-    Behaviors.receive[GreetCommand] { (context, message) =>
+    Behaviors.receive { (context, message) =>
       message match {
         case Greet(whom) =>
           if (state.greetsCount < state.maxGreets) {
@@ -25,12 +25,23 @@ object GreeterFP {
             context.log.info(s"Hello, $whom! Greet count is [$newGreetsCount]")
             doGreeter(state.copy(greetsCount = newGreetsCount))
           } else {
-            context.log.warn(s"Sorry $whom, I'm too tired to greet! Greet count [$state.greetsCount]")
-            Behaviors.same
+            context.log.warn(s"Sorry $whom, I'm too tired to greet! Greet count [${state.greetsCount}]")
+            tiredGreeter()
           }
         case _ =>
           context.log.error("Only for Greet")
-          Behaviors.same
+          doGreeter(state)
       }
+    }
+
+  private def tiredGreeter(): Behavior[GreetCommand] =
+    Behaviors.receive { (context, message) =>
+      message match
+        case Greet(_) =>
+          context.log.info("zZzZzZz")
+        // Note: Here, once the greeter is tired, there is no return back!
+        case _ => context.log.error("Only for Greet")
+
+      tiredGreeter()
     }
 }
