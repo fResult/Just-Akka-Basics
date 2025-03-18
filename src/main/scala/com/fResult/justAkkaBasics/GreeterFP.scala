@@ -12,20 +12,25 @@ object GreeterFP {
   final case class GoodBye(whom: String) extends GreetCommand
   // Protocol definition ->
 
-  final case class State(attendance: Int = 0)
+  final case class State(greetsCount: Int = 0, maxGreets: Int = 10)
 
-  def apply(state: State = State(0)): Behavior[GreetCommand] =
+  def apply(state: State): Behavior[GreetCommand] = doGreeter(state)
+
+  private def doGreeter(state: State): Behavior[GreetCommand] =
     Behaviors.receive[GreetCommand] { (context, message) =>
       message match {
         case Greet(whom) =>
-          context.log.info(s"Hello, $whom! Attendance is [${state.attendance + 1}]")
-          // We update the behavior to handle the next message
-          // with new immutable state
-          apply(state.copy(state.attendance + 1))
-        case GoodBye(whom) =>
-          context.log.info(s"Goodbye, $whom! Attendance is [${state.attendance - 1}]")
-          // Updating state for Goodbye as we did with Greet
-          apply(state.copy(state.attendance - 1))
+          if (state.greetsCount < state.maxGreets) {
+            val newGreetsCount = state.greetsCount + 1
+            context.log.info(s"Hello, $whom! Greet count is [$newGreetsCount]")
+            doGreeter(state.copy(greetsCount = newGreetsCount))
+          } else {
+            context.log.warn(s"Sorry $whom, I'm too tired to greet! Greet count [$state.greetsCount]")
+            Behaviors.same
+          }
+        case _ =>
+          context.log.error("Only for Greet")
+          Behaviors.same
       }
     }
 }
