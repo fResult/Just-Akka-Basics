@@ -12,14 +12,18 @@ object Main {
   }
 
   private def handleGreeterFp(): Unit = {
-    val greeterSystem = ActorSystem(GreeterFP(GreeterFP.State(maxGreets = 2)), "greeter-fp")
+    val greeterSystem = ActorSystem(GreeterFP(GreeterFP.State(maxGreets = 3, minimumAttendance = 2)), "greeter-fp")
 
     // ! Send a message to `greeterSystem` actor
     greeterSystem ! GreeterFP.Greet("Akka w/ FP")
-    greeterSystem ! GreeterFP.Greet("Korn w/ FP")
     greeterSystem ! GreeterFP.GoodBye("Akka w/ FP")
+    greeterSystem ! GreeterFP.Greet("Korn w/ FP")
+    greeterSystem ! GreeterFP.GoodBye("Korn w/ FP")
     greeterSystem ! GreeterFP.Greet("John w/ FP")
     greeterSystem ! GreeterFP.Greet("Alex w/ FP")
+    greeterSystem ! GreeterFP.Greet("Sarah w/ FP")
+    greeterSystem ! GreeterFP.GoodBye("Sarah w/ FP")
+    greeterSystem ! GreeterFP.Greet("George w/ FP")
     println(">>> Press ENTER to exit <<<")
     readLine()
     Exception.ignoring(classOf[Exception])
