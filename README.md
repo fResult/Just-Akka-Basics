@@ -11,7 +11,7 @@ the [Akka Basics for Scala](https://akkademy.akka.io/learn/courses/22/akka-basic
 - IDE with Scala support (IntelliJ IDEA, VS Code, etc.)
 - Basic knowledge of Scala
 
-\[Optional\] You can use [SDKMAN!](https://sdkman.io/install) to install JDK21, Scala and SBT:
+\[Optional\] You can use [SDKMAN!](https://sdkman.io/install) to install JDK21, Scala, and SBT:
 
 Installation Example:
 
